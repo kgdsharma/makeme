@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web: 
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    volumes:
+      - /makeme/node_modules
+      - .:/makeme
+  tests:
+    stdin_open: true 
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /makeme/node_modules
+      - .:/makeme
+    command: ['npm','run','test']
